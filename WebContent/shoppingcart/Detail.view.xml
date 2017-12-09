@@ -1,0 +1,25 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="rinku.shopping.cart.shoppingcart.Detail" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{i18n>detailPageTitle}">
+	  <headerContent>
+          <Button icon="sap-icon://log" tooltip="Logout" press="onLogout" type="Reject" />
+      </headerContent>
+	
+	   <content>
+	   <ObjectHeader
+			intro="{product>ProductName} \n Seller Name: Rinku Sahu"
+			title="{product>QuantityPerUnit} \n Price: {product>UnitPrice} INR
+			      \n Available in Stock : {product>UnitsInStock}" />	   
+	   </content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button						
+						text="{i18n>detailAddToCart}" press="handleAddButtonPress" type="" icon="sap-icon://add" />
+					<Button						
+						text="{i18n>payment}" icon="sap-icon://simple-payment" />
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</core:View>

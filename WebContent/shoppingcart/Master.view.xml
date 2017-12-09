@@ -1,0 +1,62 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="rinku.shopping.cart.shoppingcart.Master">
+	<Page title="{i18n>MasterPageTitle}" >
+     		<headerContent>
+     		   <Button icon="sap-icon://cart" press="onCartPress"/>
+     		</headerContent>
+     		<subHeader>
+			<Bar id="searchBar">
+				<contentMiddle>
+					<SearchField
+						id="searchField"
+						showRefreshButton="{device>/isNoTouch}"
+						search="onSearch"
+						tooltip="{i18n>masterSearchTooltip}"
+						width="100%">
+					</SearchField>
+				</contentMiddle>
+			</Bar>
+		</subHeader>
+		
+       <content>
+			<List
+      id="productList"
+      class="sapUiResponsiveMargin"
+      width="auto"
+      items="{
+             path:'product>/Products',
+             sorter : {
+				path : 'ProductID',
+				group : true
+			}
+      }" >
+      <items>
+		<ObjectListItem
+				title="{product>ProductName}"
+				number="{
+					parts: [{path: 'product>UnitPrice'}, 'EUR'],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {
+						showMeasure: false
+					}
+				}"
+				numberUnit="EUR"
+				numberState="{= ${product>UnitPrice} > 50 ? 'Error' : 'Success' }" 
+				type="Navigation"
+				press="onListItemPress" >
+					<!-- <firstStatus>
+					<ObjectStatus text="{
+						path: 'invoice>Status',
+						formatter: '.formatter.statusText'
+					}"/>
+					</firstStatus> -->
+			</ObjectListItem>
+		</items>
+   </List>
+		</content>
+		<footer>
+			<Bar>		
+			</Bar>
+		</footer>
+</Page>
+</mvc:View>

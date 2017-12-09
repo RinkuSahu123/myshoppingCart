@@ -1,0 +1,133 @@
+{
+  "_version": "1.1.0",
+  "sap.app": {
+	"_version": "1.1.0",
+	"id": "sap.m.splitApp",
+	"type": "application",
+	"i18n": "i18n/i18n.properties",
+	"title": "{{appTitle}}",
+	"description": "{{appDescription}}",
+	"applicationVersion": {
+	  "version": "1.0.0"
+	},
+	"ach": "CA-UI5-DOC",
+	"dataSources": {
+	  "shopProducts": {
+		"uri": "proxy/http/services.odata.org/V3/Northwind/Northwind.svc/",
+		"type": "OData",
+		"settings": {
+		  "odataVersion": "2.0"
+		}
+	  }
+	}
+  },
+  "sap.ui": {
+	"_version": "1.1.0",
+	"technology": "UI5",
+	"deviceTypes": {
+	  "desktop": true,
+	  "tablet": true,
+	  "phone": true
+	},
+	"supportedThemes": [
+	  "sap_bluecrystal"
+	]
+  },
+  "sap.ui5": {
+	"_version": "1.1.0",
+	"rootView": "rinku.shopping.cart.shoppingcart.App",
+	"dependencies": {
+	  "minUI5Version": "1.30",
+	  "libs": {
+		"sap.m": {}
+	  }
+	},
+	"models": {
+	  "i18n": {
+		"type": "sap.ui.model.resource.ResourceModel",
+		"settings": {
+		  "bundleName": "rinku.shopping.cart.i18n.i18n"
+		}
+	  },
+	  "product" : {
+		"dataSource": "shopProducts"
+	  }
+	},
+	"routing": {
+	  "config": {
+		"routerClass": "sap.m.routing.Router",
+		"viewType": "XML",
+		"viewPath": "rinku.shopping.cart.shoppingcart",
+		"controlId": "app",
+		"controlAggregation": "pages",
+		"transition": "slide"
+	  },
+	  "routes": [
+	    {
+          "pattern": "",
+		  "name": "login",
+		  "target": "login",
+		  "clearTarget": "false"      
+	    },
+	    {
+		   "pattern": "cart",
+		   "name": "cart",
+		   "target": "cart",
+		   "clearTarget": "false"
+	    },	  
+		{
+		  "pattern": "master",
+		  "name": "master",
+		  "target": "master",
+		  "clearTarget": "false",	
+		  "subroutes": [
+		     {
+		         "pattern": "splitApp",
+		         "name":"app",
+		         "subroutes": [
+		                 {
+		                    "pattern": "detail/{productPath}",
+		                    "name": "detail",
+		                    "target": "detail",
+		                    "subroutes" : [
+                                {
+                               "pattern" : "payment",
+                               "name" : "payment",
+                               "target" : "payment"
+                                }
+                               ]
+		                  }           
+		                ]		 
+		          }
+		        ] 
+		 }	       	
+	  ],	  
+	  "targets": {	     
+		"login": {
+		  "viewName": "Login",
+		  "controlId": "app",		 
+          "controlAggregation": "detailPages"
+		},	     
+		"master": {
+		  "viewName": "Master",
+		  "controlId": "app",
+          "controlAggregation": "masterPages"
+		},
+		"detail": {
+		  "viewName": "Detail",
+		  "controlId": "app",
+          "controlAggregation": "detailPages"
+		},		
+		"payment": {
+		  "viewName": "Payment",
+		  "controlId": "app",
+          "controlAggregation": "detailPages"
+		},
+		"cart": {
+		  "viewName": "Cart",		  
+          "controlAggregation": "masterPages"
+		}		
+	  }
+	}
+  }
+}

@@ -1,0 +1,45 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="rinku.shopping.cart.shoppingcart.Cart" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{i18n>YourCart}" showNavButton="true"  navButtonPress="onBack" >     		 
+       <content>
+			<List
+      id="cartList"
+      class="sapUiResponsiveMargin"
+      width="auto"
+      items="{
+             path:'cartProducts>/entries',
+             sorter : {
+				path : 'ProductID',
+				group : true
+			}
+      }" >
+      <items>
+		<ObjectListItem
+				title="{cartProducts>ProductName}"
+				number="{
+					parts: [{path: 'cartProducts>Price'}, 'EUR'],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {
+						showMeasure: false
+					}
+				}"
+				numberUnit="EUR"
+				numberState="{= ${cartProducts>Price} > 50 ? 'Error' : 'Success' }" 
+				type="Navigation"
+				press="onCartItemPress" >
+					<!-- <firstStatus>
+					<ObjectStatus text="{
+						path: 'invoice>Status',
+						formatter: '.formatter.statusText'
+					}"/>
+					</firstStatus> -->
+			</ObjectListItem>
+		</items>
+   </List>
+		</content>
+		<footer>
+			<Bar>		
+			</Bar>
+		</footer>
+</Page>
+</core:View>

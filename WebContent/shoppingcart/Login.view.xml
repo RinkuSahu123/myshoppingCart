@@ -1,0 +1,25 @@
+<!-- //Developer Name: Rinku Sahu//Date:26/08/2016 -->
+<mvc:View xmlns:core="sap.ui.core" 
+          xmlns:mvc="sap.ui.core.mvc" 
+          xmlns="sap.m"
+          xmlns:l="sap.ui.layout"
+          displayBlock="true"
+		  controllerName="rinku.shopping.cart.shoppingcart.Login"  >
+		
+    <Page id="loginPage" showHeader="false" class="sapUiLargeMarginTop">
+	   <content>
+        <l:VerticalLayout class="sapUiResponsiveContentPadding"            
+                width="100%">
+           <l:content>           
+              <VBox fitContainer="true" justifyContent="Center" alignItems="Center"  class="sapUiLargeMarginTop" >
+                <Input id="inpLogin"  editable="true"  maxLength="20"  placeholder="User ID"/>  
+                <Input id="inpPwd"    editable="true"  maxLength="20"  placeholder="Password" type="Password" />                                              
+                
+                <Button id="bntLogin" text="Login" press="onLogin" type="Emphasized" width="8em" class="sapUiSmallMarginBottom" />
+                <Link text="New User Registration"></Link>
+             </VBox>        
+          </l:content>
+        </l:VerticalLayout>
+		</content>
+	</Page> 
+</mvc:View>
